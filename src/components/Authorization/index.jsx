@@ -23,8 +23,7 @@ function Authorization({ onRegister }) {
         localStorage.setItem('refresh_token', res.data.refresh_token);
         console.log('Signed in by auth');
         signIn(res.data);
-        navigate('/user');
-        signIn({ emailInput, passwordInput });
+        navigate('/');
       });
   };
 

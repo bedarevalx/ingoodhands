@@ -5,12 +5,13 @@ export const AuthProvider = ({ children }) => {
   const signIn = (newUser, callback) => {
     console.log('loggined', newUser);
     setUser(newUser);
-    callback();
   };
   const signOut = (callback) => {
     setUser(null);
     localStorage.clear();
-    callback();
+    if (callback) {
+      callback();
+    }
   };
   return (
     <AuthContext.Provider value={{ user, signIn, signOut }}>

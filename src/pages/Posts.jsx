@@ -6,7 +6,7 @@ function Posts() {
   const { user, signOut } = useAuth();
 
   const logOut = () => {
-    signOut(console.log('logouted'));
+    signOut(() => console.log('logouted'));
   };
 
   return (

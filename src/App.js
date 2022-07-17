@@ -12,20 +12,15 @@ import { useAuth } from './hooks/useAuth';
 import axios from './axios';
 const cities = [];
 function App() {
-  const [isLoggined, setIsLoggined] = React.useState(false);
   const { signIn, user } = useAuth();
   React.useEffect(() => {
     try {
       axios.get('/api/auth/user-profile').then((res) => {
         if (res?.data) {
-          // signIn(res.data, console.log('loggined'));
-          setIsLoggined(true);
-          console.log('Login successful');
           signIn(res.data);
-          console.log(user);
+          console.log('Login successful', user);
         } else {
           console.log('Unloggined');
-          setIsLoggined(false);
         }
       });
     } catch (error) {

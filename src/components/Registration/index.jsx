@@ -84,7 +84,7 @@ function Registration({ onAuth, cities }) {
         localStorage.setItem('access_token', res.data.access_token);
         localStorage.setItem('refresh_token', res.data.refresh_token);
         console.log(res.status);
-        signIn(res.data, navigate(fromPage));
+        signIn(res.data, () => navigate(fromPage));
       });
   };
 
