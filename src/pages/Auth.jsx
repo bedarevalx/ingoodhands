@@ -12,10 +12,8 @@ function Auth({ cities }) {
   const { user } = useAuth();
   const [isRegistration, setIsRegistration] = React.useState(false);
 
-  const registerNow = (isRegister) => {
-    console.log(isRegister);
+  const changeToRegistration = (isRegister) => {
     setIsRegistration(isRegister);
-    console.log(isRegistration);
   };
   return user ? (
     <Navigate to={'/'} />
@@ -23,9 +21,9 @@ function Auth({ cities }) {
     <Layout>
       <Content>
         {isRegistration ? (
-          <Registration onAuth={registerNow} cities={cities} />
+          <Registration onAuth={changeToRegistration} cities={cities} />
         ) : (
-          <Authorization onRegister={registerNow} />
+          <Authorization onRegister={changeToRegistration} />
         )}
       </Content>
     </Layout>

@@ -10,11 +10,19 @@ import Posts from './pages/Posts';
 import RequireAuth from './hoc/RequireAuth';
 import { useAuth } from './hooks/useAuth';
 import axios from './axios';
-const cities = [];
 function App() {
+  const [cities, setCities] = React.useState([]);
   const { signIn, user } = useAuth();
   React.useEffect(() => {
     try {
+      axios.get('/api/city/all_cities').then((res) => {
+        setCities(
+          res.data.map((city) => ({
+            value: city.id,
+            label: city.name,
+          })),
+        );
+      });
       axios.get('/api/auth/user-profile').then((res) => {
         if (res?.data) {
           signIn(res.data);

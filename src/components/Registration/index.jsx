@@ -1,5 +1,10 @@
 import React from 'react';
-import { LockOutlined, UserOutlined, MailOutlined } from '@ant-design/icons';
+import {
+  LockOutlined,
+  UserOutlined,
+  MailOutlined,
+  EyeOutlined,
+} from '@ant-design/icons';
 import { Button, Cascader, Form, Input, Select } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from '../../axios';
@@ -10,6 +15,7 @@ const residences = [
   {
     value: 'test',
     label: 'Барнаултест',
+    sorting: true,
   },
   {
     value: 'tesss',
@@ -48,6 +54,8 @@ const tailFormItemLayout = {
 };
 
 function Registration({ onAuth, cities }) {
+  console.log(cities);
+
   const { signIn } = useAuth();
   const [form] = Form.useForm();
   const navigate = useNavigate();
@@ -220,6 +228,7 @@ function Registration({ onAuth, cities }) {
               ]}>
               <Cascader
                 options={cities}
+                dropdownClassName={'border10'}
                 placeholder={'Выберите ваш город'}
                 size={'large'}
               />
@@ -252,8 +261,8 @@ function Registration({ onAuth, cities }) {
               />
             </Form.Item>
 
-            <Form.Item className='text-already-register'>
-              Уже зарегистированы? <a onClick={() => onAuth(false)}>Войти!</a>
+            <Form.Item>
+              Уже зарегистрированы? <a onClick={() => onAuth(false)}>Войти!</a>
             </Form.Item>
             <Form.Item {...tailFormItemLayout} wrapperCol={{ span: 30 }}>
               <Button
