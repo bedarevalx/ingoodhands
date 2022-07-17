@@ -1,8 +1,6 @@
 import React from 'react';
-import MapComponent from '../components/MapComponent';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { AppContext } from '../App';
 import UserInfo from '../components/UserInfo';
 function User() {
   const [mapCoords, setMapCoords] = React.useState([]);

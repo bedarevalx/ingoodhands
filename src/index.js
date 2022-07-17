@@ -8,7 +8,9 @@ import { AuthProvider } from './hoc/AuthProvider';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <App />
+    <AuthProvider>
+      <App />
+    </AuthProvider>
   </BrowserRouter>,
 );
 

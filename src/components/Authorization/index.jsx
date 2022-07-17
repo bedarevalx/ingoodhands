@@ -4,14 +4,12 @@ import 'antd/dist/antd.min.css';
 import { useNavigate, Link } from 'react-router-dom';
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
-import { AppContext } from '../../App';
 import { useAuth } from '../../hooks/useAuth';
 function Authorization({ onRegister }) {
   const navigate = useNavigate();
   const [emailInput, setEmailInput] = React.useState('');
   const [passwordInput, setPasswordInput] = React.useState('');
   const { signIn } = useAuth();
-  const { setIsLoggined } = React.useContext(AppContext);
   const submitLogin = () => {
     console.log(emailInput, ' ', passwordInput);
     axios
@@ -24,9 +22,8 @@ function Authorization({ onRegister }) {
         localStorage.setItem('access_token', res.data.access_token);
         localStorage.setItem('refresh_token', res.data.refresh_token);
         console.log('Signed in by auth');
-        setIsLoggined(true);
+        signIn(res.data);
         navigate('/user');
-
         signIn({ emailInput, passwordInput });
       });
   };
@@ -81,11 +78,9 @@ function Authorization({ onRegister }) {
           <Form.Item name='remember' valuePropName='checked' noStyle>
             <Checkbox>Запомнить меня</Checkbox>
           </Form.Item>
-          <Link style={{ textDecoration: 'none' }} to='/forgot'>
-            <a className='login-form-forgot' onClick={() => getUserInfo()}>
-              Забыли пароль?
-            </a>
-          </Link>
+          <a className='login-form-forgot' onClick={() => getUserInfo()}>
+            Забыли пароль?
+          </a>
         </Form.Item>
 
         <Form.Item>

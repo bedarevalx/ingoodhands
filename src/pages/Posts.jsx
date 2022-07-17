@@ -2,13 +2,10 @@ import React from 'react';
 import DragField from '../components/DragField';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import { AppContext } from '../App';
 function Posts() {
   const { user, signOut } = useAuth();
-  const { setIsLoggined } = React.useContext(AppContext);
 
   const logOut = () => {
-    setIsLoggined(false);
     signOut(console.log('logouted'));
   };
 
