@@ -7,7 +7,7 @@ import {
 } from '@ant-design/icons';
 import { Button, Cascader, Form, Input, Select } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
-import axios from '../../axios';
+import axios from '../../axiosAuth';
 
 import { useAuth } from '../../hooks/useAuth';
 const { Option } = Select;
@@ -63,11 +63,13 @@ function Registration({ onAuth, cities }) {
   const fromPage = location.state?.from?.pathname || '/';
 
   const sendData = async (data) => {
+    console.log(data);
     const userData = {
       name: data.name,
       email: data.email,
       password: data.password,
       phone_number: data.phone,
+      id_city: data.city[0],
     };
     console.log(userData);
     await axios.post('/api/auth/registr', userData).then((res) => {
@@ -92,8 +94,11 @@ function Registration({ onAuth, cities }) {
         localStorage.setItem('access_token', res.data.access_token);
         localStorage.setItem('refresh_token', res.data.refresh_token);
         console.log(res.status);
-        signIn(res.data, () => navigate(fromPage));
       });
+    await axios.get('/api/auth/user-profile').then((res) => {
+      console.log(res);
+      signIn(res.data);
+    });
   };
 
   const prefixSelector = (

@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from '../../axios';
+import axios from '../../axiosAuth';
 import 'antd/dist/antd.min.css';
 import { useNavigate, Link } from 'react-router-dom';
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
@@ -10,9 +10,9 @@ function Authorization({ onRegister }) {
   const [emailInput, setEmailInput] = React.useState('');
   const [passwordInput, setPasswordInput] = React.useState('');
   const { signIn } = useAuth();
-  const submitLogin = () => {
+  const submitLogin = async () => {
     console.log(emailInput, ' ', passwordInput);
-    axios
+    await axios
       .post('/api/auth/login', {
         email: emailInput,
         password: passwordInput,
@@ -21,10 +21,12 @@ function Authorization({ onRegister }) {
         console.log('Email:', emailInput, ' Password:', passwordInput);
         localStorage.setItem('access_token', res.data.access_token);
         localStorage.setItem('refresh_token', res.data.refresh_token);
-        console.log('Signed in by auth');
-        signIn(res.data);
-        navigate('/');
       });
+    await axios.get('/api/auth/user-profile').then((res) => {
+      console.log('In auth', res);
+      signIn(res.data);
+      navigate('/');
+    });
   };
 
   const getUserInfo = () => {
@@ -32,10 +34,6 @@ function Authorization({ onRegister }) {
     axios.get('/api/auth/user-profile').then((res) => {
       console.log(res);
     });
-  };
-  const submitLogOut = () => {
-    localStorage.clear();
-    console.log(localStorage.getItem('access_token'));
   };
 
   return (

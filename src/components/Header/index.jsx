@@ -7,7 +7,7 @@ const { Title } = Typography;
 function Header() {
   const { user } = useAuth();
   return (
-    <header className='bg-reg-color opacity-70 shadow-header font-header-text'>
+    <header className='bg-reg-color shadow-header font-header-text'>
       <div className='flex justify-between'>
         {/* левая часть */}
         <Link to='/'>

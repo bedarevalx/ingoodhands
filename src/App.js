@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout } from 'antd';
 import { Routes, Route } from 'react-router-dom';
-import axios from './axios';
+import axios from './axiosAuth';
 
 import Auth from './pages/Auth';
 import User from './pages/User';
@@ -17,7 +17,9 @@ import { useAuth } from './hooks/useAuth';
 const { Footer, Content } = Layout;
 function App() {
   const [cities, setCities] = React.useState([]);
+  const [categories, setCategories] = React.useState([]);
   const { signIn, user } = useAuth();
+
   React.useEffect(() => {
     try {
       axios.get('/api/city/all_cities').then((res) => {
@@ -31,20 +33,27 @@ function App() {
       axios.get('/api/auth/user-profile').then((res) => {
         if (res?.data) {
           signIn(res.data);
-          console.log('Login successful', user);
         } else {
-          console.log('Unloggined');
         }
+      });
+      axios.get('api/category/get_category').then((res) => {
+        console.log(res);
+        setCategories(res.data);
+        console.log(categories);
+        console.log(categories);
+        console.log(categories);
+        console.log(categories);
+        console.log(categories);
       });
     } catch (error) {
       console.log('Some error occurred');
     }
   }, []);
   return (
-    <div className='bg-white max-w-screen-2xl m-auto	'>
+    <div className='bg-white max-w-screen-2xl m-auto h-[90vh] rounded-b-xl	'>
       <Header />
       <Routes>
-        <Route exact path='/' element={<Posts />} />
+        <Route exact path='/' element={<Posts categories={categories} />} />
         <Route exact path='/auth' element={<Auth cities={cities} />} />
         <Route
           exact

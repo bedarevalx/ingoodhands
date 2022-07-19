@@ -7,7 +7,7 @@ module.exports = {
     },
     extend: {
       colors: {
-        'reg-color': '#1890ff',
+        'reg-color': '#4aa8fb',
         body: '#e5e7eb',
       },
       boxShadow: {
