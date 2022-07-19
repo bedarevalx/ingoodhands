@@ -2,6 +2,7 @@ import React from 'react';
 import DragField from '../components/DragField';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import SwiperCat from '../components/SwiperCat';
 function Posts() {
   const { user, signOut } = useAuth();
 
@@ -17,6 +18,7 @@ function Posts() {
         <button>User Info</button>
       </Link>
       <DragField />
+      <SwiperCat />
     </>
   );
 }

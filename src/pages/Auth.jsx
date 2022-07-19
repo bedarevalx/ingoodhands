@@ -18,15 +18,13 @@ function Auth({ cities }) {
   return user ? (
     <Navigate to={'/'} />
   ) : (
-    <Layout>
-      <Content>
-        {isRegistration ? (
-          <Registration onAuth={changeToRegistration} cities={cities} />
-        ) : (
-          <Authorization onRegister={changeToRegistration} />
-        )}
-      </Content>
-    </Layout>
+    <>
+      {isRegistration ? (
+        <Registration onAuth={changeToRegistration} cities={cities} />
+      ) : (
+        <Authorization onRegister={changeToRegistration} />
+      )}
+    </>
   );
 }
 

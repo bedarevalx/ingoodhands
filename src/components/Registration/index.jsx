@@ -81,7 +81,7 @@ function Registration({ onAuth, cities }) {
 
   const onFinish = async (values) => {
     console.log('Received values of form: ', values);
-    sendData(values);
+    await sendData(values);
     await axios
       .post('/api/auth/login', {
         email: values.email,
